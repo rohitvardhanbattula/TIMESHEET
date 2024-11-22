@@ -1,0 +1,98 @@
+<mvc:View controllerName="project1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+   
+    <Page id="page" title="Employee Time Sheet Filter">
+        <content>
+            <VBox>
+                <Panel headerText="Selection Screen">
+                     <VBox>
+                        <Label text="Input" />
+                            <HBox width="100%" alignItems="Center" justifyContent="Center">
+                                <Label text="Employee ID:" />
+                                <Input id="employeeIdInput" width="100%" />
+                            </HBox>
+                           
+                            <HBox alignItems="Center" width="100%">
+                           
+                            <HBox width="500%" alignItems="Center" justifyContent="Center">
+                                <Label text="Start Date &amp; End Date:" />
+                                <DateRangeSelection id="dateRange" width="100%" />
+                            </HBox>
+ 
+                            <VBox width="-500%" alignItems="Center" justifyContent="Start">
+                                <Button text="Search" press="onSearch" width="100%" />
+                               
+                            </VBox>
+                            <VBox width="-500%" alignItems="Center" justifyContent="Start">
+                                <Button text="Create" press="oncreate" width="100%" />
+                               
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </Panel>
+                <Table id="dataTable" inset="false" width="auto" items="{path: 'DocumentModel>/'}">
+                    <headerToolbar>
+                        <Toolbar>
+                            <Title text="Data" />
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Text text="Employee External No" />
+                        </Column>
+                        <Column>
+                            <Text text="Task Type" />
+                        </Column>
+                        <Column>
+                            <Text text="Recorded Hours" />
+                        </Column>
+                        <Column>
+                            <Text text="Recorded Quantity" />
+                        </Column>
+                        <Column>
+                            <Text text="Recorded Date" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                            <Text text="{PersonWorkAgreementExternalID}" />
+                            <Text text="{TimeSheetDataFields/TimeSheetTaskType}" />
+                            <Text text="{TimeSheetDataFields/RecordedHours}" />
+                            <Text text="{TimeSheetDataFields/RecordedQuantity}" />
+                            <Text text="{TimeSheetDate}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+
+            </VBox>
+
+            <Dialog id="createDialog" title="Create Time Sheet Entry">
+                <VBox>
+                    <Label text="Person Work Agreement External ID" />
+                    <Input id="createPersonID" placeholder="Enter Person ID" />
+
+                    <Label text="Time Sheet Date" />
+                    <DatePicker id="createDate" placeholder="Select Date" displayFormat="yyyy-MM-dd" />
+
+                    <Label text="Recorded Hours" />
+                    <Input id="createHours" placeholder="Enter Hours" type="Number" />
+
+                    <Label text="Task Type" />
+                    <Input id="createTaskType" placeholder="Enter Task Type" />
+
+                    <Label text="RecordedQuantity" />
+                    <TextArea id="createQuantity" placeholder="Enter Recorded Quantity" rows="2" />
+                </VBox>
+                <endButton>
+                    <Button text="Close" press="onDialogClose" />
+                </endButton>
+                <beginButton>
+                    <Button text="Post" press="onPost" type="Emphasized" />
+                </beginButton>
+            </Dialog>
+        </content>
+    </Page>
+</mvc:View>
